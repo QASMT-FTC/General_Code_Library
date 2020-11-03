@@ -1,0 +1,23 @@
+            angle = Math.hypot(gamepad1.left_stick_x, gamepad1.left_stick_y);
+            robotAngle = Math.atan2(gamepad1.left_stick_y, gamepad1.left_stick_x) - Math.PI / 4;
+            rightX = gamepad1.right_stick_x;
+            powers[0] = angle * Math.cos(robotAngle) + rightX;
+            powers[1] = angle * Math.sin(robotAngle) - rightX;
+            powers[2] = angle * Math.sin(robotAngle) + rightX;
+            powers[3] = angle * Math.cos(robotAngle) - rightX;
+            double largest = 1.0;
+            largest = Math.max(largest, Math.abs(powers[0]));
+            largest = Math.max(largest, Math.abs(powers[1]));
+            largest = Math.max(largest, Math.abs(powers[2]));
+            largest = Math.max(largest, Math.abs(powers[3]));
+
+
+            frontLeftDrive.setPower(powers[0]/largest);
+            frontRightDrive.setPower(powers[1]/largest);
+            backLeftDrive.setPower(powers[2]/largest);
+            backRightDrive.setPower(powers[3]/largest);
+            
+            
+            //where powers[] is an array of 4 doubles
+            //Java.lang.Math is imported
+            //control signs are switched as neccessary 
